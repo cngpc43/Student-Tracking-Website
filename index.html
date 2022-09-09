@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <title>bootstrap teamplate 101</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+
+        <!-- Search bar -->
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-5">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="name">
+                    <label>Nhập Tên</label>
+                </div>
+            </div>
+        </div>
+        <!-- Table -->
+        <div class="main-table">
+            <div class="row container-fluid">
+                <div class="col">
+                    <table class="table" id="main-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">STT</th>
+                                <th scope="col">MSSV</th>
+                                <th scope="col">Ho ten</th>
+                                <th scope="col">Khoa</th>
+                                <th scope="col">Tinh trang</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page navigation -->
+        <div class="row">
+            <div class="col">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <!-- <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#1">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li> -->
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+
+<!-- Functions -->
+<script>
+    function readTextFile(file, callback) {
+        var rawFile = new XMLHttpRequest();
+        rawFile.overrideMimeType("application/json");
+        rawFile.open("GET", file, true);
+        rawFile.onreadystatechange = function () {
+            if (rawFile.readyState === 4 && rawFile.status == "200") {
+                callback(rawFile.responseText);
+            }
+        }
+        rawFile.send(null);
+    }
+
+    function toQuery(str) {
+        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+        str = str.replace(/đ/g, "d");
+        str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+        str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+        str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+        str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+        str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+        str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+        str = str.replace(/Đ/g, "D");
+        str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, ""); // ̀ ́ ̃ ̉ ̣  huyền, sắc, ngã, hỏi, nặng
+        str = str.replace(/\u02C6|\u0306|\u031B/g, ""); // ˆ ̆ ̛  Â, Ê, Ă, Ơ, Ư
+        str = str.replace(/ + /g, "");
+        str = str.replace(/\s/g, "");
+        str = str.toLowerCase();
+        str = str.trim();
+        str = str.replace(/!|@|%|\^|\*|\(|\)|\+|\=|\<|\>|\?|\/|,|\.|\:|\;|\'|\"|\&|\#|\[|\]|~|\$|_|`|-|{|}|\||\\/g, "");
+        return str;
+    }
+
+    function createRow(data) {
+        if (data && data.length) {
+            return `
+            <tr>
+                <td>${data[0]}</td>
+                <td>${data[1]}</td>
+                <td>${data[2]}</td>
+                <td>${data[5]}</td>
+                <td>${data[6]}</td>
+            </tr>
+            `
+        }
+        return ''
+    }
+
+    function search(input) {
+        console.log(input)
+        input = input.split(' ')
+        return DATA.filter(val => {
+            var cnt = 0
+            for (element of input) {
+                // if (val[val.length - 1].includes(toQuery(element)))
+                    // cnt++
+                val[val.length - 1].forEach(subVal => {
+                    if(subVal.includes(toQuery(element)))
+                        cnt++
+                })
+            }
+            if (cnt == input.length)
+                return true
+        })
+    }
+
+    function display(data, limit = 200, offset = 0) {
+        var tbody = document.querySelector('#main-table tbody')
+        var htmltab = ''
+        var i = offset * limit
+        var stopPoint = i + limit
+        for (; i < stopPoint; i++) {
+            htmltab += createRow(data[i])
+        }
+        tbody.innerHTML = htmltab
+        initPagination(1, Math.floor((data.length / limit) + 1))
+    }
+    function initPagination(min, max) {
+        function p(pNum, isActive) {
+            if (isActive) {
+                return `<li class="page-item"><a class="page-link active" pOffset="${pNum}">${pNum}</a></li>`
+            }
+            return `<li class="page-item"><a class="page-link" pOffset="${pNum}">${pNum}</a></li>`
+        }
+
+        if (min !== undefined && max !== undefined && min > 0 && max > 0) {
+
+            Pagination.min = min
+            Pagination.max = max
+            if (!Pagination.currentPage) Pagination.currentPage = 1
+
+            var $pagination = document.querySelector('ul.pagination')
+            var content = ''
+            const prev = `<li class="page-item"><a class="page-link" pOffset="prev">«</a></li>`
+            const next = `<li class="page-item"><a class="page-link" pOffset="next">&raquo;</a></li>`
+            if (max - min > 5) {
+                for (let i = min; i < 3; i++) {
+                    content += p(i, i == Pagination.currentPage)
+                }
+                content += p('...')
+                for (let i = max - 1; i <= max; i++) {
+                    content += p(i, i == Pagination.currentPage)
+                }
+            }
+            else if (max - min > 0) {
+                for (let i = min; i <= max; i++) {
+                    content += p(i, i == Pagination.currentPage)
+                }
+            }
+            else {
+
+            }
+            $pagination.innerHTML = prev + content + next
+
+            document.querySelectorAll('a.page-link').forEach(el => {
+                el.addEventListener('click', pLink_click_callback)
+            })
+
+        }
+
+        function pLink_click_callback(event) {
+            console.log(event)
+            var pOffset = event.target.getAttribute('pOffset')
+            switch (pOffset) {
+                case 'next':
+                    if (Pagination.currentPage < Pagination.max) {
+                        Pagination.currentPage++;
+                        display(search($input.value), 200, Pagination.currentPage - 1)
+                        disablePagination('next', 0)
+                    }
+                    else {
+                        disablePagination('next', 1)
+                    }
+                    break;
+
+                case 'prev':
+                    if (Pagination.currentPage > 1) {
+                        Pagination.currentPage--;
+                        display(search($input.value), 200, Pagination.currentPage - 1)
+                        console.log(Pagination.currentPage)
+                        disablePagination('prev', 0)
+                    }
+                    else {
+                        disablePagination('prev', 1)
+
+                    }
+                    break;
+                default:
+                    Pagination.currentPage = parseInt(pOffset)
+                    event.target.classList.add('active')
+                    display(search($input.value), 200, pOffset - 1)
+                    activePagination(pOffset)
+
+            }
+        }
+        function disablePagination(type, disabled) {
+
+            var $a = document.querySelector(`a.page-link[pOffset="${type}"]`)
+            if ($a) {
+                if (disabled) {
+                    $a.classList.add('disabled')
+                }
+                else {
+                    $a.classList.remove('disabled')
+                }
+            }
+
+        }
+
+        function activePagination(num) {
+            var $a = document.querySelector(`a.page-link[pOffset="${num}"]`)
+            if ($a) $a.classList.add('active')
+        }
+    }
+</script>
+
+<!-- Main -->
+<script>
+
+    // Khai báo biến chừa dữ liệu nè
+    var Pagination = {
+        currentPage: 0,
+        min: 0,
+        max: 0
+    }
+    var DATA = []
+    var $input = document.querySelector('#floatingInput')
+
+    // Đọc dữ liệu từ file json
+    readTextFile("/uit-student.json", (data) => {
+        DATA = JSON.parse(data).data
+        main()
+    });
+
+
+    function main() {
+
+        // Tạo phần query trong DATA
+        DATA = DATA.map(val => {
+            var name = val[2].split(' ')
+            val[val.length] = name.map(subname => {
+                return toQuery(subname)
+            })
+            return val
+        })
+
+        $input.addEventListener('input', () => {
+            var res = search($input.value)
+            console.log(res)
+            display(res, 200)
+        })
+
+    }
+
+
+</script>
+<script>
+
+</script>
+
+</html>

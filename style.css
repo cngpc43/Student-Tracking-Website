@@ -1,0 +1,19 @@
+.form-control {
+    margin-top: 50px;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+.pagination {
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
+}
+
+.main-table {
+    height: calc(100vh - 124px - 55px);
+    overflow-y: scroll;
+}
+
